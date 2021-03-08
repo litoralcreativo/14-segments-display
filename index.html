@@ -13,8 +13,60 @@
         id="inp"
         type="text"
         onchange="changeText()"
-        value="pantalla de 14 segmentos"
+        value=""
       />
+      <div id="sliders">
+        <div>
+          <label for="speedSetter" style="color: white">speed</label>
+          <input
+            id="speedSetter"
+            type="range"
+            value="10"
+            min="1"
+            max="50"
+            onchange="setSpeed()"
+          />
+        </div>
+        <div>
+          <label for="sizeSetter" style="color: white">size</label>
+          <input
+            id="sizeSetter"
+            type="range"
+            value="30"
+            min="15"
+            max="80"
+            onchange="setLength()"
+          />
+          <label for="weigthSetter" style="color: white">weigth</label>
+          <input
+            id="weigthSetter"
+            type="range"
+            value="3"
+            min="2"
+            max="10"
+            onchange="setWeigth()"
+          />
+        </div>
+        <div>
+          <label for="heightSetter" style="color: white">height</label>
+          <input
+            id="heightSetter"
+            type="range"
+            value="5"
+            min="0"
+            max="20"
+            onchange="setHeight()"
+          />
+          <label for="widthSetter" style="color: white">width</label>
+          <input
+            id="widthSetter"
+            type="range"
+            value="5"
+            min="5"
+            max="20"
+            onchange="setWidth()"
+          />
+      </div>
       <canvas id="canvas"></canvas>
     </div>
     <script src="app.js"></script>

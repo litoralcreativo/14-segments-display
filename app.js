@@ -8,15 +8,24 @@ class Vector2 {
 }
 
 class segment {
-  constructor(char, x, y) {
+  constructor(char, x, y, spec = null) {
     this.char = char;
     this.initPos = new Vector2(x, y);
+    this.spec = spec;
   }
 
   update() {
     switch (this.char) {
       case "all": {
         this.display([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+        break;
+      }
+      case "::::": {
+        let arr = [];
+        for (let i = 0; i < this.spec.length; i++) {
+          arr.push(this.spec[i]);
+        }
+        this.display(arr);
         break;
       }
       case "0":
@@ -260,67 +269,67 @@ class segment {
     let p4 = 0;
     let p5 = 0;
     let p6 = 0;
-    ctx.fillStyle = `rgba(255, 0, 0, ${active ? 1 : 0.2})`;
+    ctx.fillStyle = `rgba(255, 255, 255, ${active ? 1 : 0.05})`;
     switch (index) {
       case 1: {
         s = new Vector2(this.initPos.x, this.initPos.y);
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight, s.y - weight);
-        p3 = new Vector2(s.x + weight + length, s.y - weight);
-        p4 = new Vector2(s.x + weight + weight + length, s.y);
-        p5 = new Vector2(s.x + weight + length, s.y + weight);
+        p3 = new Vector2(s.x + weight + length + width, s.y - weight);
+        p4 = new Vector2(s.x + weight + weight + length + width, s.y);
+        p5 = new Vector2(s.x + weight + length + width, s.y + weight);
         p6 = new Vector2(s.x + weight, s.y + weight);
         break;
       }
       case 2: {
         s = new Vector2(
-          this.initPos.x + length + weight * 2 + spacing,
+          this.initPos.x + length + weight * 2 + spacing + width,
           this.initPos.y + spacing
         );
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight, s.y + weight);
-        p3 = new Vector2(s.x + weight, s.y + weight + length);
-        p4 = new Vector2(s.x, s.y + weight + weight + length);
-        p5 = new Vector2(s.x - weight, s.y + weight + length);
+        p3 = new Vector2(s.x + weight, s.y + weight + length + height);
+        p4 = new Vector2(s.x, s.y + weight + weight + length + height);
+        p5 = new Vector2(s.x - weight, s.y + weight + length + height);
         p6 = new Vector2(s.x - weight, s.y + weight);
         break;
       }
       case 3: {
         s = new Vector2(
-          this.initPos.x + length + weight * 2 + spacing,
-          this.initPos.y + length + weight * 2 + spacing * 3
+          this.initPos.x + length + weight * 2 + spacing + width,
+          this.initPos.y + length + height + weight * 2 + spacing * 3
         );
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight, s.y + weight);
-        p3 = new Vector2(s.x + weight, s.y + weight + length);
-        p4 = new Vector2(s.x, s.y + weight + weight + length);
-        p5 = new Vector2(s.x - weight, s.y + weight + length);
+        p3 = new Vector2(s.x + weight, s.y + weight + length + height);
+        p4 = new Vector2(s.x, s.y + weight + weight + length + height);
+        p5 = new Vector2(s.x - weight, s.y + weight + length + height);
         p6 = new Vector2(s.x - weight, s.y + weight);
         break;
       }
       case 4: {
         s = new Vector2(
           this.initPos.x,
-          this.initPos.y + length * 2 + weight * 4 + spacing * 4
+          this.initPos.y + height * 2 + length * 2 + weight * 4 + spacing * 4
         );
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight, s.y - weight);
-        p3 = new Vector2(s.x + weight + length, s.y - weight);
-        p4 = new Vector2(s.x + weight + weight + length, s.y);
-        p5 = new Vector2(s.x + weight + length, s.y + weight);
+        p3 = new Vector2(s.x + weight + length + width, s.y - weight);
+        p4 = new Vector2(s.x + weight + weight + length + width, s.y);
+        p5 = new Vector2(s.x + weight + length + width, s.y + weight);
         p6 = new Vector2(s.x + weight, s.y + weight);
         break;
       }
       case 5: {
         s = new Vector2(
           this.initPos.x - spacing,
-          this.initPos.y + length + weight * 2 + spacing * 3
+          this.initPos.y + length + height + weight * 2 + spacing * 3
         );
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight, s.y + weight);
-        p3 = new Vector2(s.x + weight, s.y + weight + length);
-        p4 = new Vector2(s.x, s.y + weight + weight + length);
-        p5 = new Vector2(s.x - weight, s.y + weight + length);
+        p3 = new Vector2(s.x + weight, s.y + weight + length + height);
+        p4 = new Vector2(s.x, s.y + weight + weight + length + height);
+        p5 = new Vector2(s.x - weight, s.y + weight + length + height);
         p6 = new Vector2(s.x - weight, s.y + weight);
         break;
       }
@@ -328,29 +337,29 @@ class segment {
         s = new Vector2(this.initPos.x - spacing, this.initPos.y + spacing);
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight, s.y + weight);
-        p3 = new Vector2(s.x + weight, s.y + weight + length);
-        p4 = new Vector2(s.x, s.y + weight + weight + length);
-        p5 = new Vector2(s.x - weight, s.y + weight + length);
+        p3 = new Vector2(s.x + weight, s.y + weight + length + height);
+        p4 = new Vector2(s.x, s.y + weight + weight + length + height);
+        p5 = new Vector2(s.x - weight, s.y + weight + length + height);
         p6 = new Vector2(s.x - weight, s.y + weight);
         break;
       }
       case 7: {
         s = new Vector2(
           this.initPos.x,
-          this.initPos.y + length + weight * 2 + spacing * 2
+          this.initPos.y + height + length + weight * 2 + spacing * 2
         );
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight, s.y - weight);
         p3 = new Vector2(
-          s.x + weight + length / 2 - weight - spacing,
+          s.x + weight + length / 2 - weight - spacing + +width / 2,
           s.y - weight
         );
         p4 = new Vector2(
-          s.x + weight + weight + length / 2 - weight - spacing,
+          s.x + weight + weight + length / 2 - weight - spacing + +width / 2,
           s.y
         );
         p5 = new Vector2(
-          s.x + weight + length / 2 - weight - spacing,
+          s.x + weight + length / 2 - weight - spacing + +width / 2,
           s.y + weight
         );
         p6 = new Vector2(s.x + weight, s.y + weight);
@@ -358,21 +367,21 @@ class segment {
       }
       case 8: {
         s = new Vector2(
-          this.initPos.x + length / 2 + weight + spacing,
-          this.initPos.y + length + weight * 2 + spacing * 2
+          this.initPos.x + length / 2 + weight + spacing + width / 2,
+          this.initPos.y + height + length + weight * 2 + spacing * 2
         );
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight, s.y - weight);
         p3 = new Vector2(
-          s.x + weight + length / 2 - weight - spacing,
+          s.x + weight + length / 2 - weight - spacing + width / 2,
           s.y - weight
         );
         p4 = new Vector2(
-          s.x + weight + weight + length / 2 - weight - spacing,
+          s.x + weight + weight + length / 2 - weight - spacing + width / 2,
           s.y
         );
         p5 = new Vector2(
-          s.x + weight + length / 2 - weight - spacing,
+          s.x + weight + length / 2 - weight - spacing + width / 2,
           s.y + weight
         );
         p6 = new Vector2(s.x + weight, s.y + weight);
@@ -380,27 +389,39 @@ class segment {
       }
       case 9: {
         s = new Vector2(
-          this.initPos.x + length / 2 - weight - spacing + weight * 2 + spacing,
+          this.initPos.x +
+            length / 2 -
+            weight -
+            spacing +
+            weight * 2 +
+            spacing +
+            width / 2,
           this.initPos.y + spacing
         );
         p1 = new Vector2(s.x + weight, s.y + weight);
         p2 = new Vector2(s.x + weight, s.y + weight);
-        p3 = new Vector2(s.x + weight, s.y + weight + length);
-        p4 = new Vector2(s.x, s.y + weight + weight + length);
-        p5 = new Vector2(s.x - weight, s.y + weight + length);
+        p3 = new Vector2(s.x + weight, s.y + weight + length + height);
+        p4 = new Vector2(s.x, s.y + weight + weight + length + height);
+        p5 = new Vector2(s.x - weight, s.y + weight + length + height);
         p6 = new Vector2(s.x - weight, s.y + weight);
         break;
       }
       case 10: {
         s = new Vector2(
-          this.initPos.x + length / 2 - weight - spacing + weight * 2 + spacing,
-          this.initPos.y + length + weight * 2 + spacing * 3
+          this.initPos.x +
+            length / 2 -
+            weight -
+            spacing +
+            weight * 2 +
+            spacing +
+            width / 2,
+          this.initPos.y + length + height + weight * 2 + spacing * 3
         );
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight, s.y + weight);
-        p3 = new Vector2(s.x + weight, s.y + weight + length);
-        p4 = new Vector2(s.x, s.y + weight + length);
-        p5 = new Vector2(s.x - weight, s.y + weight + length);
+        p3 = new Vector2(s.x + weight, s.y + weight + length + height);
+        p4 = new Vector2(s.x, s.y + weight + length + height);
+        p5 = new Vector2(s.x - weight, s.y + weight + length + height);
         p6 = new Vector2(s.x - weight, s.y + weight);
         break;
       }
@@ -412,38 +433,38 @@ class segment {
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x + weight + spacing, s.y);
         p3 = new Vector2(
-          s.x + weight + length / 2 - weight * 2 - spacing,
-          s.y - weight * 2 + length
+          s.x + weight + length / 2 - weight * 2 - spacing + width / 2,
+          s.y - weight * 2 + length + height
         );
         p4 = new Vector2(
-          s.x + weight + length / 2 - weight * 2 - spacing,
-          s.y + length
+          s.x + weight + length / 2 - weight * 2 - spacing + width / 2,
+          s.y + length + height
         );
         p5 = new Vector2(
-          s.x + length / 2 - weight * 2 - 2 * spacing,
-          s.y + length
+          s.x + length / 2 - weight * 2 - 2 * spacing + width / 2,
+          s.y + length + height
         );
         p6 = new Vector2(s.x, s.y + weight + spacing);
         break;
       }
       case 12: {
         s = new Vector2(
-          this.initPos.x + weight + length,
+          this.initPos.x + weight + length + width,
           this.initPos.y + weight + spacing
         );
         p1 = new Vector2(s.x, s.y);
         p2 = new Vector2(s.x - weight - spacing, s.y);
         p3 = new Vector2(
-          s.x - weight - length / 2 + weight * 2 + spacing,
-          s.y - weight * 2 + length
+          s.x - weight - length / 2 + weight * 2 + spacing - width / 2,
+          s.y - weight * 2 + length + height
         );
         p4 = new Vector2(
-          s.x - weight - length / 2 + weight * 2 + spacing,
-          s.y + length
+          s.x - weight - length / 2 + weight * 2 + spacing - width / 2,
+          s.y + length + height
         );
         p5 = new Vector2(
-          s.x - length / 2 + weight * 2 + 2 * spacing,
-          s.y + length
+          s.x - length / 2 + weight * 2 + 2 * spacing - width / 2,
+          s.y + length + height
         );
         p6 = new Vector2(s.x, s.y + weight + spacing);
         break;
@@ -451,45 +472,45 @@ class segment {
       case 13: {
         s = new Vector2(
           this.initPos.x + length / 2 - spacing,
-          this.initPos.y + weight * 3 + spacing * 3 + length
+          this.initPos.y + weight * 3 + spacing * 3 + length + height
         );
-        p1 = new Vector2(s.x, s.y);
-        p2 = new Vector2(s.x - weight - spacing, s.y);
+        p1 = new Vector2(s.x + width / 2, s.y);
+        p2 = new Vector2(s.x - weight - spacing + width / 2, s.y);
         p3 = new Vector2(
           s.x - weight - length / 2 + weight * 2 + spacing,
-          s.y - weight * 2 + length
+          s.y - weight * 2 + length + height
         );
         p4 = new Vector2(
           s.x - weight - length / 2 + weight * 2 + spacing,
-          s.y + length
+          s.y + length + height
         );
         p5 = new Vector2(
           s.x - length / 2 + weight * 2 + 2 * spacing,
-          s.y + length
+          s.y + length + height
         );
-        p6 = new Vector2(s.x, s.y + weight + spacing);
+        p6 = new Vector2(s.x + width / 2, s.y + weight + spacing);
         break;
       }
       case 14: {
         s = new Vector2(
-          this.initPos.x + weight * 2 + spacing + length / 2,
-          this.initPos.y + weight * 3 + spacing * 3 + length
+          this.initPos.x + weight * 2 + spacing + length / 2 + width,
+          this.initPos.y + weight * 3 + spacing * 3 + length + height
         );
-        p1 = new Vector2(s.x, s.y);
-        p2 = new Vector2(s.x + weight + spacing, s.y);
+        p1 = new Vector2(s.x - width / 2, s.y);
+        p2 = new Vector2(s.x + weight + spacing - width / 2, s.y);
         p3 = new Vector2(
           s.x + weight + length / 2 - weight * 2 - spacing,
-          s.y - weight * 2 + length
+          s.y - weight * 2 + length + height
         );
         p4 = new Vector2(
           s.x + weight + length / 2 - weight * 2 - spacing,
-          s.y + length
+          s.y + length + height
         );
         p5 = new Vector2(
           s.x + length / 2 - weight * 2 - 2 * spacing,
-          s.y + length
+          s.y + length + height
         );
-        p6 = new Vector2(s.x, s.y + weight + spacing);
+        p6 = new Vector2(s.x - width / 2, s.y + weight + spacing);
         break;
       }
     }
@@ -508,18 +529,29 @@ class segment {
 }
 
 class segmentWord {
-  constructor(str, numOfSeg, startX, startY) {
+  constructor(str, numOfSeg, startX, startY, marquesine = true) {
     this.str = str;
     this.numOfSeg = numOfSeg;
     this.marqStr = this.marquesineText();
+    this.specCharacters = [];
     this.x = startX;
     this.y = startY;
     this.segments = [];
     this.marquesineSegments = [];
+    this.marquesine = marquesine;
     this.createSegments();
   }
 
   marquesineText() {
+    // ::01011010110010::
+    let specChar = this.str.match(/\:{2}(\d{14})\:{2}/);
+    if (specChar) {
+      this.specCharacters = [];
+      const scIndex = this.str.indexOf(specChar[0]);
+      const sc = { char: specChar[1], index: scIndex };
+      this.str = this.str.replace(specChar[0], "");
+      this.specCharacters.push(sc);
+    }
     let spaces = "";
     for (let i = 0; i < this.numOfSeg; i++) {
       spaces = spaces + " ";
@@ -531,16 +563,31 @@ class segmentWord {
   createSegments() {
     this.segments = [];
     for (let i = 0; i < this.numOfSeg; i++) {
-      const seg = new segment(this.marqStr[i], this.x + i * length * 2, this.y);
+      const seg = new segment(
+        this.marquesine ? this.marqStr[i] : this.str[i],
+        this.x + i * length * 2 + weight * 2 * i + width * i + segmentSpace * i,
+        this.y
+      );
       this.segments.push(seg);
     }
   }
 
   updateMarquesine() {
-    this.marqStr = this.marqStr =
-      this.marqStr.slice(1) + this.marqStr.slice(0, 1);
+    this.marqStr = this.marqStr.slice(1) + this.marqStr.slice(0, 1);
     for (let i = 0; i < this.numOfSeg; i++) {
-      this.segments[i].char = this.marqStr[i];
+      if (this.marquesine) {
+        this.segments[i].char = this.marqStr[i];
+      } else {
+        if (
+          this.specCharacters.length > 0 &&
+          this.specCharacters[0].index == i
+        ) {
+          this.segments[i].spec = this.specCharacters[0].char;
+          this.segments[i].char = "::::";
+        } else {
+          this.segments[i].char = this.str[i];
+        }
+      }
     }
   }
 
@@ -552,27 +599,59 @@ class segmentWord {
 }
 
 let spacing = 1;
-let weight = 2;
-let length = 15;
+let weight = 3;
+let length = 30;
+let height = 0;
+let width = 5;
+let segmentSpace = 0;
+let speed = 10;
+let counter = 0;
 
-const seg = new segmentWord("pantalla de 14 segmentos", 10, 20, 20);
+const seg = new segmentWord("", 10, 10, 20, true);
 
 let count = 1;
 function draw() {
-  // define width and height
-  ctx.canvas.width = 330;
-  ctx.canvas.height = 80;
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
   // update all
-  seg.updateMarquesine();
-  seg.update();
+  if (counter >= speed) {
+    // define width and height
+    let canWidth =
+      seg.segments.length *
+      (width + length * 2 + spacing + segmentSpace + weight * 2);
+
+    ctx.canvas.width = canWidth;
+    ctx.canvas.height = 200;
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    seg.updateMarquesine();
+    seg.update();
+    counter = 0;
+  } else {
+    counter++;
+  }
 }
+
 function changeText() {
   seg.str = inp.value;
   seg.marqStr = seg.marquesineText();
-  console.log(inp.value);
+}
+function setHeight() {
+  height = parseInt(document.getElementById("heightSetter").value);
+  seg.createSegments();
+}
+function setWidth() {
+  width = parseInt(document.getElementById("widthSetter").value);
+  seg.createSegments();
+}
+function setLength() {
+  length = parseInt(document.getElementById("sizeSetter").value);
+  seg.createSegments();
+}
+function setWeigth() {
+  weight = parseInt(document.getElementById("weigthSetter").value);
+  seg.createSegments();
+}
+function setSpeed() {
+  speed = parseInt(document.getElementById("speedSetter").value);
 }
 
-setInterval(draw, 200);
+setInterval(draw, 30);
